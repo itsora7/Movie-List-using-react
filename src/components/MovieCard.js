@@ -1,6 +1,5 @@
 import Button from 'react-bootstrap/Button';
 import Card from 'react-bootstrap/Card';
-
 export const MovieCard = ({movie={},func, showDelete,handleOnTrash}) => {
   console.log(movie);
   const {Poster, Title, Year,imdbRating, imdbID} = movie;
