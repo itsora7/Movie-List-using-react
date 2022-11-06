@@ -12,6 +12,13 @@ const addMovieToList = movieObj =>{
   const newArg = movies.filter((item) => item.imdbID!= movieObj.imdbID)
   setMovies([...newArg, movieObj])
 }
+const handleOnDelete = (id) => {
+  if(window.confirm("Are you sure you want to delete this movid")){
+  setMovies(movies.filter((item) => item.imdbID!== id))
+
+  }
+}
+
 console.log(movies)
   return (
     <div className='wrapper'>
@@ -23,7 +30,7 @@ console.log(movies)
     <SearchForm addMovieToList={addMovieToList}/>
 
     {/* movie list  */}
-    <MovieList movies={movies} />
+    <MovieList movies={movies} handleOnDelete={handleOnDelete}/>
 
     </Container>
     </div>

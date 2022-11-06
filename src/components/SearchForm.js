@@ -1,9 +1,10 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { Alert, Button } from 'react-bootstrap';
 import Col from 'react-bootstrap/Col';
 import Form from 'react-bootstrap/Form';
 import Row from 'react-bootstrap/Row';
 import { fetchData } from '../utilities/axios-helper';
+import { randomChar } from '../utilities/randomGenerator';
 import { MovieCard } from './MovieCard';
 
 export const SearchForm = ({addMovieToList}) => {
@@ -11,6 +12,19 @@ export const SearchForm = ({addMovieToList}) => {
   const [movie, setMovie] = useState({});
   const [error, setError] = useState("");
 
+  useEffect (()=>{
+    //generate radom user
+    const char = randomChar()
+    console.log(char)
+    //and call fetch api
+    const initialFetch = async() =>{
+      const resp = await fetchData (char)
+      //set movie to state
+      setMovie(resp.data)
+    }
+    initialFetch()
+   
+  }, [])
 
   // get the form data while typing
   const handleOnChange = (e) =>{
@@ -52,6 +66,9 @@ setMovie({})
 setForm("")
 
 }
+const handleOnTrash =() =>{
+  setMovie({})
+}
   // display movie date in our UI
   return (
     <Form className='py-3' onSubmit={handleOnSubmit}>
@@ -65,7 +82,7 @@ setForm("")
       </Row>
       <Row className='py-3 d-flex justify-content-center'>
         {movie.imdbID && <MovieCard movie={movie} 
-        func ={handleOnAddToList}/>}
+        func ={handleOnAddToList} handleOnTrash ={handleOnTrash}/>}
         {
           error && <Alert variant='danger'>{error}</Alert>
         }
