@@ -30,7 +30,7 @@ str === "all" ? setDisplay (movies): setDisplay(movies.filter((item)=> item.cat 
         <Row className='mt-5'>
             <Col>
             <BtnGroups handleOnFileer={handleOnFileer}/>
-            <div className='py-2'>{display.length} Movies found!
+            <div className='py-2'>{display.length} Movies found!!!
             </div>
             </Col>
 
